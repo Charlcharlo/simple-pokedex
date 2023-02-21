@@ -1,0 +1,130 @@
+:root {
+    --blue: #0a80c0;
+    --blue-light: #d6edfa;
+    --dark-blue: #103b52;
+    --black-blue: #050f14;
+    --off-white: #edf2f5;
+    --yellow-white: #f8f8ef;
+    --red: #E12C38;
+    --yellow: #fffb18;
+
+    --blackBorder: 10px solid var(--black-blue);
+    --thinBlackBorder: 2px solid var(--black-blue);
+}
+
+@font-face {
+    font-family: "Ketchum";
+    src: url(./fonts/Ketchum.otf);
+}
+
+@font-face {
+    font-family: "Bittypix";
+    src: url(./fonts/Bittypix-Monospace.otf);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    color: var(--black-blue);
+}
+
+html {
+    background-color: var(--off-white);
+}
+
+/* Text */
+
+.title {
+    position: relative;
+    z-index: 2;
+    font-family: Ketchum;
+    font-size: 9rem;
+    color: var(--blue);
+    -webkit-text-stroke: 1px var(--yellow);
+}
+
+.bit-title {
+    font-family: Bittypix;
+    color: var(--yellow-white);
+}
+
+/* Blocks */
+
+.title-block {
+    position: relative;
+    padding: 20px 20px 70px;
+    background-color: var(--red);
+    text-align: center;
+    border-bottom: var(--blackBorder);
+}
+
+.ball-dot {
+    background-color: var(--yellow-white);
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    bottom: -60px;
+    left: 50%;
+    transform: translate(-50%);
+    border-radius: 50%;
+    border: var(--blackBorder);
+}
+
+.ball-dot .ball-dot {
+    width: 70px;
+    height: 70px;
+    bottom: -30px;
+    transform: translate(-50%, -50%);
+    border-width: 5px;
+}
+
+.main-body {
+    text-align: center;
+    padding: 70px 10% 20px;
+}
+.search-block {
+    text-align: center;
+    width: 60%;
+    margin: 0 auto;
+}
+
+.results {
+    background-color: white;
+    width: calc(100% + 20px);
+    max-height: 300px;
+    margin: 0 auto;
+    overflow-y: scroll;
+    text-align: left;
+    border: var(--thinBlackBorder);
+    border-top: none;
+    box-shadow: 0 0 5px var(--dark-blue);
+}
+
+.results::-webkit-scrollbar {
+    background-color: var(--off-white);
+    /* box-shadow: inset 0 0 5px var(--blue-light); */
+}
+
+.results::-webkit-scrollbar-thumb {
+    background-color: var(--dark-blue);
+    border-radius: 2px;
+    width: 2px;
+}
+
+.results div {
+    font-size: 1.3rem;
+    padding: 10px;
+}
+
+.results div:hover {
+    background-color: var(--blue-light);
+}
+
+.search-bar {
+    width: 100%;
+    margin: 0 auto;
+    font-size: 1.5rem;
+    padding: 10px;
+    border: var(--thinBlackBorder);
+}
