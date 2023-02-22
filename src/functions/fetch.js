@@ -1,33 +1,30 @@
-import { useState } from "react";
 import { buildTree } from "./trie";
 
-const prepareMons = () => {
-    let keys
-
-    fetch('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0')
+async function prepareMons() {
+    const keys = await fetch('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0')
     .then((response) => response.json())
     .then((data) => {
         const { results } = data;
-        keys = results
+        return results;
     })
-    .then(buildTree(keys));
+    buildTree(keys);
 }
 
-const findMon = (url) => {
-    fetch(url)
+async function findBase(url) {
+    const monData = await fetch(url)
     .then((response) => response.json())
-    .then((monData) => {
-        // console.log(data)
-        fetch(monData.species.url)
-        .then((response) => response.json())
-        .then((speciesData) => {
-            monData.species.info = speciesData;
-        })
-        .then(() => {
-            // return monData;
-            console.log(monData);
-        })
-    })
-}
+    .then((data) => {
+        return data
+    });
+    return monData;
+};
+
+async function findMon(url) {
+    const monData = await findBase(url);
+    const speciesData = await findBase(monData.species.url);
+    monData.species.info = speciesData;
+    return monData;
+    // console.log(monData);
+};
 
 export { prepareMons, findMon }

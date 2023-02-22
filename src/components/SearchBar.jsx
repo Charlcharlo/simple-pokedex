@@ -2,9 +2,10 @@ import { ClickAwayListener } from '@mui/base';
 import { Collapse } from '@mui/material';
 import { useEffect, useState } from 'react';
 import Results from './Results';
-import {buildTree, search } from '../functions/trie'
+import {buildTree, search } from '../functions/trie';
+// import { prepareMons } from '../functions/fetch';
 
-export default function SearchBar() {
+export default function SearchBar({createEntry}) {
     const [focus, setFocus] = useState(false);
     const [query, setQuery] = useState("");
     const [results, setResult] = useState([]);
@@ -52,9 +53,12 @@ export default function SearchBar() {
                     placeholder="Type here to start searching"
                 />
                 <Collapse in={focus}>
-                    <Results
-                        list={results}
-                    />
+                    <div className="results-container">
+                        <Results
+                            createEntry = {createEntry}
+                            list={results}
+                        />
+                    </div>
                 </Collapse>
                 </div>
             </ClickAwayListener>

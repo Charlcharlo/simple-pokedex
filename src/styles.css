@@ -1,15 +1,18 @@
 :root {
     --blue: #0a80c0;
-    --blue-light: #d6edfa;
+    --blue-light: #b8e2fa;
     --dark-blue: #103b52;
     --black-blue: #050f14;
     --off-white: #edf2f5;
+    --gray: #d7e1e6;
     --yellow-white: #f8f8ef;
     --red: #E12C38;
     --yellow: #fffb18;
 
     --blackBorder: 10px solid var(--black-blue);
     --thinBlackBorder: 2px solid var(--black-blue);
+
+    --body-font: Creato;
 }
 
 @font-face {
@@ -22,10 +25,20 @@
     src: url(./fonts/Bittypix-Monospace.otf);
 }
 
+@font-face {
+    font-family: "nk47";
+    src: url(./fonts/nk57-monospace-no-eb.otf);
+}
+
+@font-face {
+    font-family: "Creato";
+    src: url(./fonts/CreatoDisplay-Regular.otf);
+}
+
 * {
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
+    font-family: var(--body-font);
     color: var(--black-blue);
 }
 
@@ -89,7 +102,15 @@ html {
     margin: 0 auto;
 }
 
+.results-container {
+    position: relative;
+    width: 100%;
+}
+
 .results {
+    position: absolute;
+    top: 0;
+    left: 0;
     background-color: white;
     width: calc(100% + 20px);
     max-height: 300px;
@@ -128,3 +149,179 @@ html {
     padding: 10px;
     border: var(--thinBlackBorder);
 }
+
+/* Dex Entry */
+
+.entry-block {
+    display: flex;
+    justify-content: space-between;
+    /* padding: 20px !important; */
+    margin-top: 40px;
+    border-radius: 10px;
+    background-color: var(--gray);
+}
+
+.entry-block p {font-size: 1.2rem;}
+
+.entry-block h2 {
+    color: var(--dark-blue);
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+.entry-block .bit-title {
+    color: var(--black-blue);
+    font-size: 2.5rem;
+}
+
+.entry-block img {
+    width: 280px;
+    margin: 20px;
+}
+
+.entry-block > div {
+    padding: 20px;
+}
+
+.entry-block > div:first-child {
+    text-align: left;
+    flex-grow: 1;
+}
+
+.entry-block > div:last-child {
+    width: 320px;
+    /* padding: 20px; */
+}
+
+.name-and-number {
+    display: flex;
+    justify-content: space-between;
+}
+
+.name-and-number .bit-title:last-child {
+    font-size: 1.5rem;
+    color: var(--dark-blue);
+}
+
+.dex-select {
+    border-radius: 10px;
+    background-color: var(--off-white);
+    height: 2rem;
+    padding: 0 10px;
+    border: var(--thinBlackBorder);
+    font-size: 1rem;
+}
+
+.img-block {
+    /* padding: 20px; */
+    margin-bottom: 20px;
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.types {
+    display: flex;
+    justify-content: center;
+  }
+
+.type-block {
+    border-radius: 50px;
+    background-color: red;
+    padding: 2px;
+    margin: 0 10px;
+    width: 130px;
+    text-align: center;
+    outline: 2px solid black;
+    /* -webkit-text-stroke: 0.1rem black; */
+    /* font-weight: 600; */
+  }
+
+  .type-block p {
+    font-family: 'nk47', monospace;
+    color: white;
+    /* -webkit-text-stroke: 2px black; */
+    text-shadow:
+    -1px -1px 0 #000,  
+     1px -1px 0 #000,
+     -1px 1px 0 #000,
+      1px 1px 0 #000;
+    font-size: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  
+  .bug {
+    background-color: #8d9b10;
+  }
+  
+  .dark {
+    background-color: #443328;
+  }
+  
+  .dragon {
+    background-color: #6c56d1;
+  }
+  
+  .electric {
+    background-color: #fcbb18;
+    /* color: black; */
+  }
+  
+  .fairy {
+    background-color: #eca5ed;
+    /* color: black; */
+  }
+  
+  .fighting {
+    background-color: #85371f;
+  }
+  
+  .fire {
+    background-color: #ea3e0d;
+  }
+  
+  .flying {
+    background-color: #a1b1f7;
+  }
+  
+  .ghost {
+    background-color: #6060b2;
+  }
+  
+  .grass {
+    background-color: #64b929;
+  }
+  
+  .ground {
+    background-color: #ccac50;
+  }
+  
+  .ice {
+    background-color: #a1e6fd;
+    /* color: black; */
+  }
+  
+  .normal {
+    background-color: #c5c0b7;
+  }
+  
+  .poison {
+    background-color: #8a3d8c;
+  }
+  
+  .psychic {
+    background-color: #ee4983;
+  }
+  
+  .rock {
+    background-color: #baa257;
+  }
+  
+  .steel {
+    background-color: #b4b4c2;
+  }
+  
+  .water {
+    background-color: #3597f9;
+  }
