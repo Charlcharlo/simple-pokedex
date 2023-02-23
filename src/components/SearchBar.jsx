@@ -56,6 +56,7 @@ export default function SearchBar({createEntry}) {
                     <div className="results-container">
                         <Results
                             createEntry = {createEntry}
+                            hideResults = {hideResults}
                             list={results}
                         />
                     </div>

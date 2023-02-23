@@ -1,6 +1,6 @@
 import { findMon } from '../functions/fetch';
 
-export default function Results({list, createEntry}) {
+export default function Results({list, createEntry, hideResults}) {
     
     const populateList = (item) => {
         const key = list.indexOf(item);
@@ -8,8 +8,9 @@ export default function Results({list, createEntry}) {
             <div key={key} onClick={() => {
                 const monData = findMon(item.url);
                 createEntry(monData);
+                hideResults();
             }}>
-                <p>{item.name}</p>
+                <p>{item.displayName}</p>
             </div>
         )
     }

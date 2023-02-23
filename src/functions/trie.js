@@ -1,3 +1,6 @@
+import { kebabCase } from "lodash";
+import { parseName } from "./general";
+
 const ALPHABET_SIZE = 27;
  
 // trie node
@@ -18,33 +21,33 @@ let root;
 // If not present, inserts key into trie
     // If the key is prefix of trie node,
     // just marks leaf node
-function insert(key)
-{
+function insert(key) {
     let level;
-        let length = key.name.length;
-        let index;
+    let length = key.name.length;
+    let index;
        
-        let node = root;
+    let node = root;
        
-        for (level = 0; level < length; level++)
-        {
-            index = key.name[level].charCodeAt(0) - 'a'.charCodeAt(0);
-            
-            // Check for "-"
-            if(index === -52) {
-                index = 27;
-            }
+    for (level = 0; level < length; level++) {
+        index = key.name[level].charCodeAt(0) - 'a'.charCodeAt(0);
+        
+    // Check for "-"
+    if(index === -52) {
+        index = 27;
+    }
 
-            if (node.children[index] == null)
-                node.children[index] = new TrieNode();
-                node = node.children[index];
-        }
+    if (node.children[index] == null)
+        node.children[index] = new TrieNode();
+        node = node.children[index];
+    }
 
        
-        // mark last node as leaf
-        node.isEndOfWord = true;
-        node.value = key;
-        // node.children = null;
+    // mark last node as leaf
+    node.isEndOfWord = true;
+    // key.name = startCase(key.name);
+    node.value = key;
+
+    node.value.displayName = parseName(key.name);
 }
  
 // Returns true if key presents in trie, else false
@@ -64,6 +67,8 @@ function search(key) {
         }
         return results;
     };
+
+    key = kebabCase(key);
 
     let level;
         let length = key.length;

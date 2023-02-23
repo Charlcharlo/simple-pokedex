@@ -1,8 +1,13 @@
 import { useState } from "react";
+import { parseName } from "../functions/general";
+import { StarOutline, Star } from "@mui/icons-material";
 
 export default function DexEntry({dexData}) {
-    const [flavorIndex, setFlavorIndex] = useState(0)
-    const {name, types, id} = dexData;
+    const [ flavorIndex, setFlavorIndex ] = useState(0);
+    const [shiny, setShiny] = useState(false);
+    const { types, stats } = dexData;
+    const { entry_number: id } = dexData.species.info.pokedex_numbers[0];
+    const name = parseName(dexData.name);
     const {"official-artwork": image} = dexData.sprites.other;
     const { genera, flavor_text_entries } = dexData.species.info;
     // console.log(genera)
@@ -10,6 +15,7 @@ export default function DexEntry({dexData}) {
     const entries = flavor_text_entries.filter((element) => {
         return element.language.name === "en";
     })
+
 
 
     const renderType = (type) => {
@@ -20,8 +26,16 @@ export default function DexEntry({dexData}) {
             </div>
         )
     }
-
-
+    
+    const renderStat = (stat, i) => {
+        const statsAbbrev = ["HP", "Atk", "Def", "SpDef", "SpAtk", "Spd"];
+        return (
+            <div className="stat-block">
+                <h1 className="bit-title">{stat.base_stat}</h1>
+                <h2>{statsAbbrev[i]}</h2>
+            </div>
+        )
+    }
 
     return(
         <div className="entry-block">
@@ -52,10 +66,32 @@ export default function DexEntry({dexData}) {
                     ? entries[flavorIndex].flavor_text 
                     : "This is a new Pokemon and its data has not yet been loaded. Please check back later."}
                 </p>
+                <div className="name-and-number">
+                    {stats.map(renderStat)}
+                </div>
             </div>
             <div>
                 <div className="img-block">
-                    <img src={image.front_default} alt="zigzagoon" />
+                    <img 
+                        src={
+                            shiny ?
+                            image.front_shiny :
+                            image.front_default
+                        }
+                        alt={name} 
+                    />
+                    <button 
+                        className="invisibutton"
+                        onClick={() => {
+                            setShiny(!shiny);
+                        }}
+                    >
+                        {
+                            shiny ?
+                            <Star fontSize="large" htmlColor="#E12C38"/> :
+                            <StarOutline fontSize="large" htmlColor="#0a80c0"/> 
+                        }
+                    </button>
                 </div>
                 <div className="types">
                     {types.map(renderType)}

@@ -175,7 +175,7 @@ html {
 }
 
 .entry-block img {
-    width: 280px;
+    width: 260px;
     margin: 20px;
 }
 
@@ -189,7 +189,7 @@ html {
 }
 
 .entry-block > div:last-child {
-    width: 320px;
+    width: 300px;
     /* padding: 20px; */
 }
 
@@ -212,12 +212,43 @@ html {
     font-size: 1rem;
 }
 
+.stat-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px 0;
+    margin-top: 20px;
+    background-color: var(--off-white);
+    border-radius: 10px;
+    text-align: center;
+    width: calc(100% / 6 - 10px);
+}
+
+.stat-block .bit-title {
+    font-size: 1.5rem;
+}
+
+.stat-block h2 {
+    font-style: normal;
+    font-size: 1.5rem;
+    margin-bottom: 0;
+}
+
 .img-block {
     /* padding: 20px; */
+    position: relative;
     margin-bottom: 20px;
     width: 100%;
     background-color: white;
     border-radius: 10px;
+}
+
+.invisibutton {
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
 }
 
 .types {
