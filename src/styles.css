@@ -5,6 +5,7 @@
     --black-blue: #050f14;
     --off-white: #edf2f5;
     --gray: #d7e1e6;
+    --medGray: #788185;
     --yellow-white: #f8f8ef;
     --red: #E12C38;
     --yellow: #fffb18;
@@ -39,11 +40,19 @@
     margin: 0;
     padding: 0;
     font-family: var(--body-font);
-    color: var(--black-blue);
+    /* color: var(--black-blue); */
 }
 
 html {
     background-color: var(--off-white);
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  color: var(--black-blue);
 }
 
 /* Text */
@@ -60,6 +69,13 @@ html {
 .bit-title {
     font-family: Bittypix;
     color: var(--yellow-white);
+}
+
+.soft-title {
+  color: var(--medGray);
+  font-family: nk47;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
 }
 
 /* Blocks */
@@ -111,6 +127,7 @@ html {
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 2;
     background-color: white;
     width: calc(100% + 20px);
     max-height: 300px;
@@ -150,6 +167,10 @@ html {
     border: var(--thinBlackBorder);
 }
 
+.search-bar:focus {
+  box-shadow: 0 0 5px var(--dark-blue);
+}
+
 /* Dex Entry */
 
 .entry-block {
@@ -161,12 +182,15 @@ html {
     background-color: var(--gray);
 }
 
-.entry-block p {font-size: 1.2rem;}
+.entry-block p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
 
 .entry-block h2 {
     color: var(--dark-blue);
     font-style: italic;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
 }
 
 .entry-block .bit-title {
@@ -196,11 +220,17 @@ html {
 .name-and-number {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 20px;
 }
 
 .name-and-number .bit-title:last-child {
     font-size: 1.5rem;
     color: var(--dark-blue);
+}
+
+.name-and-number label {
+  margin-right: 10px;
+  font-size: 1rem;
 }
 
 .dex-select {
@@ -217,7 +247,7 @@ html {
     flex-direction: column;
     justify-content: center;
     padding: 20px 0;
-    margin-top: 20px;
+    /* margin-top: 20px; */
     background-color: var(--off-white);
     border-radius: 10px;
     text-align: center;
@@ -247,7 +277,7 @@ html {
     background-color: transparent;
     border: none;
     position: absolute;
-    bottom: 20px;
+    top: 20px;
     right: 20px;
 }
 
@@ -256,19 +286,22 @@ html {
     justify-content: center;
   }
 
-.type-block {
+.types .info-pill {
+  max-height: 1.5rem;
+}
+
+.info-pill {
     border-radius: 50px;
-    background-color: red;
     padding: 2px;
     margin: 0 10px;
     width: 130px;
     text-align: center;
-    outline: 2px solid black;
+    border: 2px solid black;
     /* -webkit-text-stroke: 0.1rem black; */
     /* font-weight: 600; */
   }
 
-  .type-block p {
+  .info-pill p {
     font-family: 'nk47', monospace;
     color: white;
     /* -webkit-text-stroke: 2px black; */
@@ -282,6 +315,13 @@ html {
     text-transform: uppercase;
   }
   
+  button.info-pill {
+    background-color: var(--off-white);
+    margin-right: 20px;
+    margin-left: 0;
+    font-size: 1rem;
+  }
+
   .bug {
     background-color: #8d9b10;
   }

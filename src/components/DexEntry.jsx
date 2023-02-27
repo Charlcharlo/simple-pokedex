@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { parseName } from "../functions/general";
 import { StarOutline, Star } from "@mui/icons-material";
+import { startCase } from "lodash";
+import Forms from "./Forms";
 
-export default function DexEntry({dexData}) {
+export default function DexEntry({dexData, createEntry}) {
     const [ flavorIndex, setFlavorIndex ] = useState(0);
     const [shiny, setShiny] = useState(false);
     const { types, stats } = dexData;
@@ -19,7 +21,7 @@ export default function DexEntry({dexData}) {
 
 
     const renderType = (type) => {
-        const classes = `type-block ${type.type.name}`;
+        const classes = `info-pill ${type.type.name}`;
         return (
             <div className={classes} key={type.slot}>
                 <p>{type.type.name}</p>
@@ -48,27 +50,38 @@ export default function DexEntry({dexData}) {
                     <h2>{genus ? genus.genus : "A new pokemon"}</h2>
                     {entries[0]
                     && (
-                        <select 
-                        className="dex-select"
-                        onChange={({target}) => {
-                            setFlavorIndex(target.value)
-                        }}>
+                        <div>
+                            <label className="soft-title" htmlFor="dex-select">VERSION</label>
+                            <select
+                                name="dex-select"
+                                className="dex-select"
+                                onChange={({target}) => {
+                                setFlavorIndex(target.value)
+                                }}
+                                >
                             {entries.map((entry) => {
                                 const key = entries.indexOf(entry);
+                                const region = startCase(entry.version.name);
                                 return(
-                                    <option value={key} key={key}>{entry.version.name}</option>
+                                    <option value={key} key={key}>{region}</option>
                                 )
                             })}
                         </select>
+                        </div>
                     )}
                 </div>
                 <p>{entries[flavorIndex] 
                     ? entries[flavorIndex].flavor_text 
                     : "This is a new Pokemon and its data has not yet been loaded. Please check back later."}
                 </p>
+                <h3 className="soft-title">STATS</h3>
                 <div className="name-and-number">
                     {stats.map(renderStat)}
                 </div>
+                <Forms 
+                    dexData = {dexData}
+                    createEntry = {createEntry}
+                />
             </div>
             <div>
                 <div className="img-block">
@@ -82,14 +95,19 @@ export default function DexEntry({dexData}) {
                     />
                     <button 
                         className="invisibutton"
+                        style={{
+                            color:  shiny ?
+                                    "var(--red)" :
+                                    "var(--blue)"
+                        }}
                         onClick={() => {
                             setShiny(!shiny);
                         }}
                     >
                         {
                             shiny ?
-                            <Star fontSize="large" htmlColor="#E12C38"/> :
-                            <StarOutline fontSize="large" htmlColor="#0a80c0"/> 
+                            <Star fontSize="large"/> :
+                            <StarOutline fontSize="large"/> 
                         }
                     </button>
                 </div>

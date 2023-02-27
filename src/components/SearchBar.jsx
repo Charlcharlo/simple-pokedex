@@ -5,7 +5,7 @@ import Results from './Results';
 import {buildTree, search } from '../functions/trie';
 // import { prepareMons } from '../functions/fetch';
 
-export default function SearchBar({createEntry}) {
+export default function SearchBar({createEntry, setReady}) {
     const [focus, setFocus] = useState(false);
     const [query, setQuery] = useState("");
     const [results, setResult] = useState([]);
@@ -17,7 +17,9 @@ export default function SearchBar({createEntry}) {
         const { results } = data;
         setKeys(results);
     })
-    .then(buildTree(keys));
+    .then(
+        buildTree(keys)
+    );
 
     const showResults = () => {
         setFocus(true);
