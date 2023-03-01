@@ -3,11 +3,12 @@ import { parseName } from "../functions/general";
 import { StarOutline, Star } from "@mui/icons-material";
 import { startCase } from "lodash";
 import Forms from "./Forms";
+import Evolutions from "./Evolutions";
 
 export default function DexEntry({dexData, createEntry}) {
     const [ flavorIndex, setFlavorIndex ] = useState(0);
     const [shiny, setShiny] = useState(false);
-    const { types, stats } = dexData;
+    const { types, stats, evoChain } = dexData;
     const { entry_number: id } = dexData.species.info.pokedex_numbers[0];
     const name = parseName(dexData.name);
     const {"official-artwork": image} = dexData.sprites.other;
@@ -16,9 +17,7 @@ export default function DexEntry({dexData, createEntry}) {
     const genus = genera.find(element => element.language.name === 'en');
     const entries = flavor_text_entries.filter((element) => {
         return element.language.name === "en";
-    })
-
-
+    });
 
     const renderType = (type) => {
         const classes = `info-pill ${type.type.name}`;
@@ -30,9 +29,9 @@ export default function DexEntry({dexData, createEntry}) {
     }
     
     const renderStat = (stat, i) => {
-        const statsAbbrev = ["HP", "Atk", "Def", "SpDef", "SpAtk", "Spd"];
+        const statsAbbrev = ["HP", "Atk", "Def", "SpAtk", "SpDef", "Spd"];
         return (
-            <div className="stat-block">
+            <div className="stat-block" key={i}>
                 <h1 className="bit-title">{stat.base_stat}</h1>
                 <h2>{statsAbbrev[i]}</h2>
             </div>
@@ -81,6 +80,9 @@ export default function DexEntry({dexData, createEntry}) {
                 <Forms 
                     dexData = {dexData}
                     createEntry = {createEntry}
+                />
+                <Evolutions 
+                    evoChain = {evoChain}
                 />
             </div>
             <div>

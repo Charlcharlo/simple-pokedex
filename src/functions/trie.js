@@ -76,22 +76,20 @@ function search(key) {
         let node = root;
         let results = []
        
-        if(length > 0) {
-            for (level = 0; level < length; level++)
-            {
-                index = key[level].charCodeAt(0) - 'a'.charCodeAt(0);
-                
-                // Check for "-"
-                if(index === -52) {
-                    index = 27;
-                }
-    
-                if (node.children[index] == null) {
-                    return results;
-                }
-    
-                node = node.children[index];
+        for (level = 0; level < length; level++)
+        {
+            index = key[level].charCodeAt(0) - 'a'.charCodeAt(0);
+            
+            // Check for "-"
+            if(index === -52) {
+                index = 27;
             }
+
+            if (node.children[index] == null) {
+                return results;
+            }
+
+            node = node.children[index];
         }
 
         if(node.isEndOfWord) {

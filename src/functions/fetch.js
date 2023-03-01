@@ -22,7 +22,9 @@ async function findBase(url) {
 async function findMon(url) {
     const monData = await findBase(url);
     const speciesData = await findBase(monData.species.url);
+    const evoChain = await findBase(speciesData.evolution_chain.url);
     monData.species.info = speciesData;
+    monData.evoChain = evoChain;
     return monData;
     // console.log(monData);
 };
