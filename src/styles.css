@@ -118,18 +118,23 @@ button:disabled {
     margin: 0 auto;
 }
 
+.search-bar:placeholder-shown {
+  color: var(--medGray);
+}
+
 .results-container {
     position: relative;
     width: 100%;
 }
 
 .results {
+  box-sizing:border-box;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 2;
     background-color: white;
-    width: calc(100% + 20px);
+    width: 100%;
     max-height: 300px;
     margin: 0 auto;
     overflow-y: scroll;
@@ -161,6 +166,7 @@ button:disabled {
 
 .search-bar {
     width: 100%;
+    box-sizing: border-box;
     margin: 0 auto;
     font-size: 1.5rem;
     padding: 10px;
@@ -174,8 +180,10 @@ button:disabled {
 /* Dex Entry */
 
 .entry-block {
+    box-sizing:border-box;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap-reverse;
     /* padding: 20px !important; */
     margin-top: 40px;
     border-radius: 10px;
@@ -210,6 +218,7 @@ button:disabled {
 .entry-block > div:first-child {
     text-align: left;
     flex-grow: 1;
+    max-width: calc(100% - 380px);
 }
 
 .entry-block > div:last-child {
@@ -219,6 +228,7 @@ button:disabled {
 
 .name-and-number {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     margin-bottom: 20px;
 }
@@ -247,11 +257,12 @@ button:disabled {
     flex-direction: column;
     justify-content: center;
     padding: 20px 0;
-    /* margin-top: 20px; */
+    /* margin-bottom: 20px; */
     background-color: var(--off-white);
     border-radius: 10px;
     text-align: center;
     width: calc(100% / 6 - 10px);
+    min-width: 80px;
 }
 
 .stat-block .bit-title {
@@ -284,10 +295,28 @@ button:disabled {
 .types {
     display: flex;
     justify-content: center;
-  }
+}
 
-.types .info-pill {
-  max-height: 1.5rem;
+.evolution-block {
+  margin-top: 20px;
+}
+
+.evolution-tree, 
+.evolution-tree > div > div {
+  display: flex;
+  align-items: center;
+}
+
+.evolution-tree .info-pill {
+  margin: 10px 20px 10px 0;
+}
+
+.evo-arrow {
+  height: 2rem;
+  margin: 10px 10px 10px 0;
+  display: flex;
+  align-items: center;
+  float: left;
 }
 
 .info-pill {
@@ -297,6 +326,7 @@ button:disabled {
     width: 130px;
     text-align: center;
     border: 2px solid black;
+    max-height: 2rem;
     /* -webkit-text-stroke: 0.1rem black; */
     /* font-weight: 600; */
   }
@@ -320,6 +350,7 @@ button:disabled {
     margin-right: 20px;
     margin-left: 0;
     font-size: 1rem;
+    height: 2rem;
   }
 
   .bug {
@@ -395,4 +426,72 @@ button:disabled {
   
   .water {
     background-color: #3597f9;
+  }
+
+  @media (max-width: 800px) {
+    .title {
+      font-size: 7rem;
+    }
+
+    .search-block {
+      width: 100%;
+    }
+
+    .main-body {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .entry-block > div:first-child {
+      max-width: 100%;
+    }
+
+    .entry-block .bit-title {
+      font-size: 2rem;
+    }
+
+    .stat-block .bit-title {
+      font-size: 1.5rem;
+    }
+
+    .stat-block h2 {
+      font-size: 1.2rem;
+    }
+  
+  }
+
+  @media (max-width: 600px) {
+    .title {
+      font-size: 5rem;
+    }
+
+    .bit-title {
+      font-size: 1.5rem;
+    }
+
+    .entry-block .bit-title {
+      font-size: 1.5rem;
+    }
+
+    .stat-block {
+      width: calc(100% / 3 - 10px);
+    }
+
+    .stat-block .bit-title {
+      font-size: 1.2rem;
+    }
+
+    .stat-block h2 {
+      font-size: 1rem;
+    }
+
+    .evolution-tree {
+      flex-wrap: wrap;
+    }
+  }
+
+  @media (max-width: 350px) {
+    .title {
+      font-size: 4rem;
+    }
   }
