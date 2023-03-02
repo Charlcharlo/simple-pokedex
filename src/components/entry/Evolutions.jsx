@@ -25,7 +25,7 @@ export default function Evolutions({evoChain}) {
         return null;
     } else {
     return (
-        <div>
+        <div className="divide-half info-block">
             <h3 className="soft-title">EVOLUTIONS</h3>
             <div className="evolution-tree">
                 <button className="info-pill">{species.name}</button>

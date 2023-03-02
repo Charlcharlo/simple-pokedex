@@ -1,5 +1,5 @@
 import { startCase } from "lodash";
-import { findMon } from "../functions/fetch";
+import { findMon } from "../../functions/fetch";
 // import { useState } from "react";
 
 export default function Forms({dexData, createEntry}) {
@@ -51,9 +51,11 @@ export default function Forms({dexData, createEntry}) {
 
     if(varieties.length > 1) {
         return (
-            <div>
+            <div  className="divide-half info-block">
                 <h3 className="soft-title">FORMS</h3>
-                { varieties.map(renderForms) }
+                <div className="name-and-number">
+                    { varieties.map(renderForms)}
+                </div>
             </div>
         )
     } else {

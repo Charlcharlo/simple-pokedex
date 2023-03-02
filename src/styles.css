@@ -21,9 +21,14 @@
     src: url(./fonts/Ketchum.otf);
 }
 
-@font-face {
+/* @font-face {
     font-family: "Bittypix";
     src: url(./fonts/Bittypix-Monospace.otf);
+} */
+
+@font-face {
+  font-family: "bit-8";
+  src: url(./fonts/8-bit-fortress.ttf);
 }
 
 @font-face {
@@ -67,51 +72,100 @@ button:disabled {
 }
 
 .bit-title {
-    font-family: Bittypix;
+    font-family: bit-8;
     color: var(--yellow-white);
 }
 
 .soft-title {
   color: var(--medGray);
-  font-family: nk47;
+  font-family: bit-8;
   font-size: 1.2rem;
   margin-bottom: 10px;
 }
 
-/* Blocks */
+/* Blocks ********************************************************/
+
+.info-block {
+  background-color: var(--off-white);
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.col-between {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.row-between {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  /* margin-bottom: 20px; */
+}
+
+.divide-half {
+  box-sizing: border-box;
+  flex-grow: 1;
+  /* container-type: inline-size; */
+}
+
+.divide-half:first-child {
+  margin-right: 20px;
+}
+
+@container (max-width: 100%) {
+  .divide-half:first-child {
+    margin-right: 0;
+  }
+}
+
+.divide-half:last-child {
+  margin-right: 0;
+}
+
+.row-start {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+/* Header */
 
 .title-block {
-    position: relative;
-    padding: 20px 20px 70px;
-    background-color: var(--red);
-    text-align: center;
-    border-bottom: var(--blackBorder);
+  position: relative;
+  padding: 20px 20px 70px;
+  background-color: var(--red);
+  text-align: center;
+  border-bottom: var(--blackBorder);
 }
 
 .ball-dot {
-    background-color: var(--yellow-white);
-    width: 100px;
-    height: 100px;
-    position: absolute;
-    bottom: -60px;
-    left: 50%;
-    transform: translate(-50%);
-    border-radius: 50%;
-    border: var(--blackBorder);
+  background-color: var(--yellow-white);
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  bottom: -60px;
+  left: 50%;
+  transform: translate(-50%);
+  border-radius: 50%;
+  border: var(--blackBorder);
 }
 
 .ball-dot .ball-dot {
-    width: 70px;
-    height: 70px;
-    bottom: -30px;
-    transform: translate(-50%, -50%);
-    border-width: 5px;
+  width: 70px;
+  height: 70px;
+  bottom: -30px;
+  transform: translate(-50%, -50%);
+  border-width: 5px;
 }
 
 .main-body {
     text-align: center;
     padding: 70px 10% 20px;
 }
+
 .search-block {
     text-align: center;
     width: 60%;
@@ -177,22 +231,35 @@ button:disabled {
   box-shadow: 0 0 5px var(--dark-blue);
 }
 
-/* Dex Entry */
+/* Dex Entry ********************************************************/
 
 .entry-block {
-    box-sizing:border-box;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap-reverse;
-    /* padding: 20px !important; */
+    padding: 20px;
+    text-align: left;
     margin-top: 40px;
     border-radius: 10px;
     background-color: var(--gray);
 }
 
-.entry-block p {
+/*** Top Block ******************************/
+
+#entry-top-L {
+  text-align: left;
+  flex-grow: 1;
+  max-width: calc(100% - 320px);
+}
+
+#entry-top-L > .info-block:first-child {
+  flex-grow: 1;
+}
+
+#entry-top-R {
+  width: 300px;
+}
+
+.entry-text {
   font-size: 1.2rem;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 }
 
 .entry-block h2 {
@@ -211,34 +278,12 @@ button:disabled {
     margin: 20px;
 }
 
-.entry-block > div {
-    padding: 20px;
-}
-
-.entry-block > div:first-child {
-    text-align: left;
-    flex-grow: 1;
-    max-width: calc(100% - 380px);
-}
-
-.entry-block > div:last-child {
-    width: 300px;
-    /* padding: 20px; */
-}
-
-.name-and-number {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-bottom: 20px;
-}
-
-.name-and-number .bit-title:last-child {
+.row-between .bit-title:last-child {
     font-size: 1.5rem;
     color: var(--dark-blue);
 }
 
-.name-and-number label {
+.row-between label {
   margin-right: 10px;
   font-size: 1rem;
 }
@@ -252,13 +297,18 @@ button:disabled {
     font-size: 1rem;
 }
 
+#stat-container {
+  padding-bottom: 0;
+  /* margin: 20px 0; */
+}
+
 .stat-block {
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 20px 0;
-    /* margin-bottom: 20px; */
-    background-color: var(--off-white);
+    margin-bottom: 20px;
+    background-color: var(--gray);
     border-radius: 10px;
     text-align: center;
     width: calc(100% / 6 - 10px);
@@ -269,10 +319,8 @@ button:disabled {
     font-size: 1.5rem;
 }
 
-.stat-block h2 {
-    font-style: normal;
-    font-size: 1.5rem;
-    margin-bottom: 0;
+.stat-block .soft-title {
+  margin-top: 10px;
 }
 
 .img-block {
@@ -282,6 +330,7 @@ button:disabled {
     width: 100%;
     background-color: white;
     border-radius: 10px;
+    flex-grow: 1;
 }
 
 .invisibutton {
@@ -295,10 +344,7 @@ button:disabled {
 .types {
     display: flex;
     justify-content: center;
-}
-
-.evolution-block {
-  margin-top: 20px;
+    /* margin-bottom: 20px; */
 }
 
 .evolution-tree, 
@@ -313,6 +359,7 @@ button:disabled {
 
 .evo-arrow {
   height: 2rem;
+  width: 2rem;
   margin: 10px 10px 10px 0;
   display: flex;
   align-items: center;
@@ -322,7 +369,7 @@ button:disabled {
 .info-pill {
     border-radius: 50px;
     padding: 2px;
-    margin: 0 10px;
+    margin: 0 5px;
     width: 130px;
     text-align: center;
     border: 2px solid black;
@@ -346,7 +393,7 @@ button:disabled {
   }
   
   button.info-pill {
-    background-color: var(--off-white);
+    background-color: var(--gray);
     margin-right: 20px;
     margin-left: 0;
     font-size: 1rem;
@@ -485,9 +532,35 @@ button:disabled {
       font-size: 1rem;
     }
 
-    .evolution-tree {
-      flex-wrap: wrap;
+    .evolution-tree,
+    .evolution-tree > div > div,
+    .evolution-tree > div > div > div > div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
+
+    .evolution-tree .button {
+      display: block;
+    }
+
+    .evolution-tree > div > div > div {
+    display: flex;
+    align-items: center;
+  }
+
+  .evolution-tree .info-pill {
+    margin: 10px 20px 10px 0;
+  }
+
+.evo-arrow {
+  /* height: 2rem; */
+  /* margin: 10px 10px 10px 0; */
+  /* display: flex; */
+  /* align-items: center; */
+  /* transform: rotate(90deg); */
+  float: none;
+}
   }
 
   @media (max-width: 350px) {
