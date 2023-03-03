@@ -29,10 +29,12 @@ function App() {
           setEntry = {setReady}
         />
         {monPresent &&
-          <DexEntry
-            createEntry = {createEntry}
-            dexData = {dexData}
-          />
+          <div className="entry-view">
+            <DexEntry
+              createEntry = {createEntry}
+              dexData = {dexData}
+            />
+          </div>
         }
         {
           !ready &&

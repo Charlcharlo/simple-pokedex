@@ -23,9 +23,10 @@ export default function DexEntry({dexData, createEntry}) {
                     <Types types = {types} />
                 </div>
             </div>
-            <div className="row-between">
+            <div className="row-between" id="entry-bottom">
                 <Evolutions 
                     evoChain = {evoChain}
+                    createEntry = {createEntry}
                 />
                 <Forms 
                     dexData = {dexData}

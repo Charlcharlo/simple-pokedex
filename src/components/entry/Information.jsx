@@ -5,7 +5,6 @@ import { parseName } from "../../functions/general";
 export default function Information({dexData}) {
     const [ flavorIndex, setFlavorIndex ] = useState(0);
 
-    const { entry_number: id } = dexData.species.info.pokedex_numbers[0];
     const name = parseName(dexData.name);
     const { genera, flavor_text_entries } = dexData.species.info;
     const genus = genera.find(element => element.language.name === 'en');
@@ -15,13 +14,12 @@ export default function Information({dexData}) {
     
     return (
         <div className="flex-col">
+            <div className="info-block" id="info-section">
             <div className="row-between" id="name-and-number">
                 <h1 className="bit-title">{name}</h1>
-                <h1 className="bit-title">{id}</h1>
             </div>
-            <div className="info-block">
             <div className="row-between">
-                <h2>{genus ? `The ${genus.genus}` : "A new pokemon"}</h2>
+                <h3 className="soft-title">{genus ? `The ${genus.genus}` : "A new pokemon"}</h3>
                 {entries[0]
                 && (
                 <div>

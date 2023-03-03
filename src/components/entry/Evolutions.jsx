@@ -1,7 +1,7 @@
 import EvoArrow from "./EvoArrow";
 
 export default function Evolutions({evoChain}) {
-    function evoButtons(chain, i,array) {
+    function evoButtons(chain, i ,array) {
         const length = array.length;
         const {evolves_to: evos, species} = chain;
 

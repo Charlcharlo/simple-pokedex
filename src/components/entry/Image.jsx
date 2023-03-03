@@ -3,6 +3,7 @@ import { Star, StarOutline } from "@mui/icons-material";
 
 export default function Image({dexData}) {
     const {name} = dexData;
+    const { entry_number: id } = dexData.species.info.pokedex_numbers[0];
     const {"official-artwork": image} = dexData.sprites.other;
     const [shiny, setShiny] = useState(false);
 
@@ -34,6 +35,7 @@ export default function Image({dexData}) {
                     <StarOutline fontSize="large"/> 
                 }
             </button>
+            <h1 className="soft-title">#{id}</h1>
         </div>
     )
 }

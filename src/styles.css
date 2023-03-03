@@ -5,15 +5,18 @@
     --black-blue: #050f14;
     --off-white: #edf2f5;
     --gray: #d7e1e6;
-    --medGray: #788185;
+    --medGray: #5a6164;
     --yellow-white: #f8f8ef;
     --red: #E12C38;
     --yellow: #fffb18;
+
+    --std-shadow: 2px 2px 10px var(--dark-blue);
 
     --blackBorder: 10px solid var(--black-blue);
     --thinBlackBorder: 2px solid var(--black-blue);
 
     --body-font: Creato;
+    --bit-font: pixel-operator;
 }
 
 @font-face {
@@ -25,6 +28,11 @@
     font-family: "Bittypix";
     src: url(./fonts/Bittypix-Monospace.otf);
 } */
+
+@font-face {
+  font-family: "pixel-operator";
+  src: url(./fonts/PixelOperator.ttf);
+}
 
 @font-face {
   font-family: "bit-8";
@@ -69,17 +77,19 @@ button:disabled {
     font-size: 9rem;
     color: var(--blue);
     -webkit-text-stroke: 1px var(--yellow);
+    text-shadow: var(--std-shadow);
 }
 
 .bit-title {
-    font-family: bit-8;
+    font-size: 2rem;
+    font-family: var(--bit-font);
     color: var(--yellow-white);
 }
 
 .soft-title {
   color: var(--medGray);
-  font-family: bit-8;
-  font-size: 1.2rem;
+  font-family: var(--bit-font);
+  font-size: 2rem;
   margin-bottom: 10px;
 }
 
@@ -108,21 +118,11 @@ button:disabled {
 .divide-half {
   box-sizing: border-box;
   flex-grow: 1;
-  /* container-type: inline-size; */
+  margin: 20px 10px 0;
 }
 
-.divide-half:first-child {
-  margin-right: 20px;
-}
-
-@container (max-width: 100%) {
-  .divide-half:first-child {
-    margin-right: 0;
-  }
-}
-
-.divide-half:last-child {
-  margin-right: 0;
+.entry-view {
+  min-height: calc(100vh - 40px);
 }
 
 .row-start {
@@ -195,7 +195,7 @@ button:disabled {
     text-align: left;
     border: var(--thinBlackBorder);
     border-top: none;
-    box-shadow: 0 0 5px var(--dark-blue);
+    box-shadow: var(--std-shadow);
 }
 
 .results::-webkit-scrollbar {
@@ -228,25 +228,27 @@ button:disabled {
 }
 
 .search-bar:focus {
-  box-shadow: 0 0 5px var(--dark-blue);
+  box-shadow: var(--std-shadow);
 }
 
 /* Dex Entry ********************************************************/
 
 .entry-block {
-    padding: 20px;
+    padding: 10px;
     text-align: left;
-    margin-top: 40px;
+    margin: 40px 0 20px;
     border-radius: 10px;
     background-color: var(--gray);
+    box-shadow: var(--std-shadow);
 }
 
 /*** Top Block ******************************/
 
 #entry-top-L {
+  padding: 10px 10px 0;
   text-align: left;
   flex-grow: 1;
-  max-width: calc(100% - 320px);
+  max-width: calc(100% - 340px);
 }
 
 #entry-top-L > .info-block:first-child {
@@ -254,6 +256,7 @@ button:disabled {
 }
 
 #entry-top-R {
+  padding: 10px 10px 0;
   width: 300px;
 }
 
@@ -264,37 +267,32 @@ button:disabled {
 
 .entry-block h2 {
     color: var(--dark-blue);
-    font-style: italic;
+    font-family: var(--bit-font);
     /* margin-bottom: 20px; */
 }
 
 .entry-block .bit-title {
     color: var(--black-blue);
-    font-size: 2.5rem;
-}
-
-.entry-block img {
-    width: 260px;
-    margin: 20px;
-}
-
-.row-between .bit-title:last-child {
-    font-size: 1.5rem;
-    color: var(--dark-blue);
+    font-size: 4rem;
+    margin-bottom: 10px;
 }
 
 .row-between label {
   margin-right: 10px;
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 
 .dex-select {
     border-radius: 10px;
-    background-color: var(--off-white);
+    background-color: white;
     height: 2rem;
     padding: 0 10px;
     border: var(--thinBlackBorder);
     font-size: 1rem;
+}
+
+#info-section {
+  margin-top: 0;
 }
 
 #stat-container {
@@ -316,21 +314,35 @@ button:disabled {
 }
 
 .stat-block .bit-title {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
 }
 
 .stat-block .soft-title {
+  font-size: 1.5rem;
   margin-top: 10px;
 }
 
 .img-block {
     /* padding: 20px; */
+    display: flex;
+    align-items: center;
     position: relative;
     margin-bottom: 20px;
     width: 100%;
     background-color: white;
     border-radius: 10px;
     flex-grow: 1;
+}
+
+.img-block img {
+  width: 260px;
+  margin: 20px;
+}
+
+.img-block .soft-title {
+  position: absolute;
+  top: 20px;
+  left: 20px;
 }
 
 .invisibutton {
@@ -345,6 +357,10 @@ button:disabled {
     display: flex;
     justify-content: center;
     /* margin-bottom: 20px; */
+}
+
+#entry-bottom {
+  padding-bottom: 10px;
 }
 
 .evolution-tree, 
