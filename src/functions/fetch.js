@@ -29,4 +29,13 @@ async function findMon(url) {
     // console.log(monData);
 };
 
-export { prepareMons, findMon }
+async function findBySpecies(url) {
+    const speciesData = await findBase(url);
+    const monData = await findBase(speciesData.varieties[0].pokemon.url);
+    const evoChain = await findBase(speciesData.evolution_chain.url);
+    monData.species.info = speciesData;
+    monData.evoChain = evoChain;
+    return monData;
+}
+
+export { prepareMons, findMon, findBySpecies }

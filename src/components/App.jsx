@@ -2,7 +2,7 @@ import '../styles.css';
 import Header from './Header';
 import SearchBar from './SearchBar';
 import DexEntry from './DexEntry';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 // import { Collapse } from '@mui/material';
 // import fetchMon from '../functions/fetch';
 
@@ -10,6 +10,26 @@ function App() {
   const [ready, setReady] = useState(true);
   const [dexData, setDexData] = useState(null);
   const [monPresent, setMonPresent] = useState(false);
+
+  const [width, setWidth] = useState(window.innerWidth);
+  const [flex, setFlex] = useState(null);
+
+  useEffect(() => {
+      window.addEventListener('resize', () => {
+          setWidth(window.innerWidth);
+      })
+  },
+  []
+
+  )
+  useEffect(() => {
+      if (width < 600) {
+          setFlex(true);
+      } else {
+          setFlex(false);
+      }
+  },
+  [width]);
 
   async function createEntry(mon) {
     setMonPresent(false);
@@ -33,6 +53,7 @@ function App() {
             <DexEntry
               createEntry = {createEntry}
               dexData = {dexData}
+              flex = {flex}
             />
           </div>
         }

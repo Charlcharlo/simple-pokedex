@@ -26,4 +26,10 @@ const parseName = (name) => {
     return output;
 }
 
-export { parseName };
+function checkWidth(setWidth) {
+    document.addEventListener("resize", () => {
+        setWidth(window.innerWidth);
+    });
+}
+
+export { parseName, checkWidth };

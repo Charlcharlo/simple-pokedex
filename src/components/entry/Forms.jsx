@@ -1,20 +1,18 @@
-import { startCase } from "lodash";
 import { findMon } from "../../functions/fetch";
+import { startCase } from "lodash";
+import Variant from "./Variant";
+
 // import { useState } from "react";
 
 export default function Forms({dexData, createEntry}) {
     const {varieties} = dexData.species.info;
     const {name} = dexData.species;
     const {name: pkmName} = dexData;
-    const selectStyle = {
-        // color: "white",
-        backgroundColor: "var(--yellow)",
-        borderColor: "var(--blue)",
-        cursor: "default"
-    }
+
 
     const renderForms = (form) => {
         let shortForm
+        let current
         const length = name.length + 1;
         if(name !== form.pokemon.name) {
             shortForm = form.pokemon.name.slice(length);
@@ -22,31 +20,22 @@ export default function Forms({dexData, createEntry}) {
             shortForm = "Base";
         }
 
-        shortForm = startCase(shortForm);
-
-        if(form.pokemon.name === pkmName) {
-            return (
-                <button 
-                    className="info-pill"
-                    style={selectStyle}
-                    disabled
-                >
-                    {shortForm}
-                </button>
-            )
+        if (pkmName === form.pokemon.name) {
+            current = true;
         } else {
-            return (
-                <button 
-                    className="info-pill"
-                    onClick={() => {
-                        const monData = findMon(form.pokemon.url);
-                        createEntry(monData);
-                    }}
-                >
-                    {shortForm}
-                </button>
-            )
+            current = false;
         }
+
+        shortForm = startCase(shortForm);
+        return (
+            <Variant
+                name={shortForm}
+                current={current}
+                createEntry={createEntry}
+                url={form.pokemon.url}
+                search={findMon}
+            />
+        )
     }
 
     if(varieties.length > 1) {

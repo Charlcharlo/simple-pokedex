@@ -103,9 +103,17 @@ button:disabled {
 }
 
 .col-between {
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
+}
+
+.col-start {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .row-between {
@@ -115,20 +123,24 @@ button:disabled {
   /* margin-bottom: 20px; */
 }
 
+.row-start {
+  display: flex;
+  flex-wrap: wrap;
+  /* justify-content: space-evenly; */
+}
+
 .divide-half {
   box-sizing: border-box;
   flex-grow: 1;
   margin: 20px 10px 0;
 }
 
-.entry-view {
-  min-height: calc(100vh - 40px);
+.divide-half.col-between {
+  width: auto;
 }
 
-.row-start {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
+.entry-view {
+  min-height: calc(100vh - 40px);
 }
 
 /* Header */
@@ -244,11 +256,21 @@ button:disabled {
 
 /*** Top Block ******************************/
 
+#entry-top {
+  flex-wrap: wrap-reverse;
+}
+
 #entry-top-L {
+  display: flex;
   padding: 10px 10px 0;
-  text-align: left;
+  /* text-align: left; */
   flex-grow: 1;
   max-width: calc(100% - 340px);
+}
+
+#entry-top-L .info-block {
+  box-sizing: border-box;
+  width: 100%;
 }
 
 #entry-top-L > .info-block:first-child {
@@ -262,6 +284,7 @@ button:disabled {
 
 .entry-text {
   font-size: 1.2rem;
+  text-align: justify;
   /* margin-bottom: 20px; */
 }
 
@@ -278,6 +301,7 @@ button:disabled {
 }
 
 .row-between label {
+  font-weight: bold;
   margin-right: 10px;
   font-size: 1.5rem;
 }
@@ -296,15 +320,19 @@ button:disabled {
 }
 
 #stat-container {
+  box-sizing: border-box;
   padding-bottom: 0;
-  /* margin: 20px 0; */
+}
+
+#stat-container .row-between {
+  width: 100%;
 }
 
 .stat-block {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 20px 0;
+    padding: 10px 0;
     margin-bottom: 20px;
     background-color: var(--gray);
     border-radius: 10px;
@@ -319,12 +347,12 @@ button:disabled {
 
 .stat-block .soft-title {
   font-size: 1.5rem;
-  margin-top: 10px;
 }
 
 .img-block {
     /* padding: 20px; */
     display: flex;
+    justify-content: center;
     align-items: center;
     position: relative;
     margin-bottom: 20px;
@@ -363,23 +391,75 @@ button:disabled {
   padding-bottom: 10px;
 }
 
-.evolution-tree, 
-.evolution-tree > div > div {
+#entry-bottom .info-block {
+  padding: 15px;
+}
+
+#entry-bottom .info-pill {
+  margin: 5px
+}
+
+.evo-branch {
   display: flex;
   align-items: center;
 }
 
 .evolution-tree .info-pill {
-  margin: 10px 20px 10px 0;
+  margin: 10px;
 }
 
 .evo-arrow {
-  height: 2rem;
-  width: 2rem;
-  margin: 10px 10px 10px 0;
+  color: var(--medGray);
+  /* height: 2rem;
+  width: 2rem; */
+  /* margin: 10px; */
   display: flex;
   align-items: center;
+  justify-content: center;
   float: left;
+}
+
+/* Eevee ****************/
+
+#eeveelutions .row-between {
+  align-items: center;
+}
+
+#eeveelutions .row-between:first-child .evo-arrow,
+#eeveelutions .row-between:last-child .evo-arrow {
+  margin: 0 10px;
+}
+
+#eeveelutions .row-between:first-child .evo-arrow:first-child,
+#eeveelutions .row-between:last-child .evo-arrow:last-child {
+  transform: rotate(-45deg);
+}
+
+#eeveelutions .row-between:first-child .evo-arrow:last-child,
+#eeveelutions .row-between:last-child .evo-arrow:first-child {
+  transform: rotate(45deg);
+}
+
+#eeveelutions .row-start {
+  align-items: center;
+}
+
+#eeveelutions .row-start:first-child .info-pill:first-child,
+#eeveelutions .row-start:last-child .info-pill:first-child,
+#eeveelutions .soft-title {
+  margin-left: 15px !important;
+}
+
+#eeveelutions .evo-arrow {
+  width: 10px;
+  height: 10px;
+}
+
+.eevee-branch,
+.eevee-branch > div > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .info-pill {
@@ -414,6 +494,13 @@ button:disabled {
     margin-left: 0;
     font-size: 1rem;
     height: 2rem;
+  }
+
+  button.info-pill:disabled {
+    /* color: var(--blue); */
+    background-color: var(--yellow);
+    border-color: var(--blue);
+    cursor: default;
   }
 
   .bug {
@@ -491,6 +578,21 @@ button:disabled {
     background-color: #3597f9;
   }
 
+  @media (max-width: 1200px) {
+    #entry-top-L {
+      max-width: 100%;
+    }
+
+    #entry-top-R {
+      flex-grow: 1;
+      max-width: 100%;
+    }
+
+    .img-block {
+      max-width: 60%;
+    }
+  }
+
   @media (max-width: 800px) {
     .title {
       font-size: 7rem;
@@ -505,16 +607,20 @@ button:disabled {
       padding-right: 20px;
     }
 
-    .entry-block > div:first-child {
-      max-width: 100%;
+    .types {
+      margin-bottom: 10px;
+    }
+
+    .stat-block {
+      width: calc(100% / 3 - 10px);
     }
 
     .entry-block .bit-title {
-      font-size: 2rem;
+      font-size: 3rem;
     }
 
     .stat-block .bit-title {
-      font-size: 1.5rem;
+      font-size: 2rem;
     }
 
     .stat-block h2 {
@@ -532,50 +638,60 @@ button:disabled {
       font-size: 1.5rem;
     }
 
-    .entry-block .bit-title {
-      font-size: 1.5rem;
+    .img-block {
+      max-width: 100%;
     }
 
-    .stat-block {
-      width: calc(100% / 3 - 10px);
+    .entry-block {
+      text-align: center;
     }
+
+    #version-dropdown {
+      flex-grow: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* .entry-block .bit-title {
+      font-size: 2rem;
+    } */
 
     .stat-block .bit-title {
-      font-size: 1.2rem;
+      font-size: 2rem;
     }
 
     .stat-block h2 {
       font-size: 1rem;
     }
 
-    .evolution-tree,
-    .evolution-tree > div > div,
-    .evolution-tree > div > div > div > div {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    #entry-bottom .info-block {
+      padding: 5px;
     }
 
-    .evolution-tree .button {
+    #entry-bottom .soft-title {
+      padding: 0 10px 10px;
+    }
+
+    .evo-branch {
+      flex-direction: column;
+    }
+
+    .third-stage, 
+    .second-stage {
+      display: flex;
+      justify-content: center;
+    }
+
+    .evo-branch .button {
       display: block;
     }
 
-    .evolution-tree > div > div > div {
-    display: flex;
-    align-items: center;
-  }
 
-  .evolution-tree .info-pill {
-    margin: 10px 20px 10px 0;
-  }
 
-.evo-arrow {
-  /* height: 2rem; */
-  /* margin: 10px 10px 10px 0; */
-  /* display: flex; */
-  /* align-items: center; */
-  /* transform: rotate(90deg); */
-  float: none;
+  .evo-arrow {
+    margin: 0;
+    float: none;
 }
   }
 

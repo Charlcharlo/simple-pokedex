@@ -1,4 +1,4 @@
-import { startCase } from "lodash";
+import { startCase, capitalize } from "lodash";
 import { useState } from "react";
 import { parseName } from "../../functions/general";
 
@@ -13,7 +13,7 @@ export default function Information({dexData}) {
     });
     
     return (
-        <div className="flex-col">
+        <div className="col-between">
             <div className="info-block" id="info-section">
             <div className="row-between" id="name-and-number">
                 <h1 className="bit-title">{name}</h1>
@@ -22,7 +22,7 @@ export default function Information({dexData}) {
                 <h3 className="soft-title">{genus ? `The ${genus.genus}` : "A new pokemon"}</h3>
                 {entries[0]
                 && (
-                <div>
+                <div id="version-dropdown">
                     <label className="soft-title" htmlFor="dex-select">VERSION</label>
                     <select
                         name="dex-select"
@@ -44,7 +44,7 @@ export default function Information({dexData}) {
             </div>
             <p className="entry-text">
                 {entries[flavorIndex] 
-                ? entries[flavorIndex].flavor_text 
+                ? capitalize(entries[flavorIndex].flavor_text)
                 : "This is a new Pokemon and its data has not yet been loaded. Please check back later."}
             </p>
             </div>

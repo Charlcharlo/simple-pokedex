@@ -1,33 +1,42 @@
-import { East, NorthEast, SouthEast, South } from "@mui/icons-material";
+import { ArrowRight, ArrowDropDown } from "@mui/icons-material";
 
-export default function EvoArrow({i, length}) {
-    const width = window.innerWidth;
-    console.log(width)
-    if (width > 600) {
-        if (i === 0 && length > 1) {
-            return (
-                <div className="evo-arrow">
-                    <NorthEast />
-                </div>
-            )
-        } else if (i === length - 1 && length > 1) {
-            return(
-                <div className="evo-arrow">
-                    <SouthEast />
-                </div>
-            )
-        } else {
-            return(
-                <div className="evo-arrow">
-                    <East />
-                </div>
-            )
-        }
-    } else {
-        return(
-            <div className="evo-arrow">
-                <South />
-            </div>
-        )
+export default function EvoArrow({i, l, flex}) {
+    let first = false;
+    let last = false;
+    let rotate;
+    if (i === 0 && l !== 1) {
+        first = true;
+        last = false;
+    } else if(i === l- 1 && l !== 1) {
+        first = false;
+        last = true;
     }
+
+    flex ?
+    rotate = {
+        transform: 
+            first ?
+            "rotate(30deg)" :
+            last ?
+            "rotate(-30deg)" :
+            "rotate(0deg)"
+    } :
+    rotate = {
+        transform: 
+            first ?
+            "rotate(-30deg)" :
+            last ?
+            "rotate(30deg)" :
+            "rotate(0deg)"
+    }
+    
+    return(
+        <div  className="evo-arrow" style={rotate}>
+            { 
+            flex ?  
+            <ArrowDropDown /> :
+            <ArrowRight />
+            }
+        </div>
+    )
 }
