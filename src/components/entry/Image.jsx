@@ -16,7 +16,8 @@ export default function Image({dexData}) {
                     image.front_shiny :
                     image.front_default
                 }
-                alt={name} 
+                alt={name}
+                loading="lazy"
             />
             <button 
                 className="invisibutton"

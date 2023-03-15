@@ -7,7 +7,7 @@ export default function Variant({ current, name, createEntry, url, search }) {
             onClick={
                 () => {
                     const monData = search(url);
-                    createEntry(monData);
+                    createEntry(monData, false);
                 }
             }
         >

@@ -10,6 +10,8 @@ function App() {
   const [ready, setReady] = useState(true);
   const [dexData, setDexData] = useState(null);
   const [monPresent, setMonPresent] = useState(false);
+  const [search, setSearch] = useState(null);
+  const [space, setSpace] = useState("0");
 
   const [width, setWidth] = useState(window.innerWidth);
   const [flex, setFlex] = useState(null);
@@ -17,7 +19,9 @@ function App() {
   useEffect(() => {
       window.addEventListener('resize', () => {
           setWidth(window.innerWidth);
-      })
+      });
+      const view = document.getElementById("header");
+      view.scrollIntoView({behavior: "smooth"});
   },
   []
 
@@ -31,15 +35,28 @@ function App() {
   },
   [width]);
 
-  async function createEntry(mon) {
-    setMonPresent(false);
-    setReady(false);
+  useEffect(() => {
+    if (search !== null) {
+      const view = document.getElementById("entry-container");
+      view.scrollIntoView({behavior: search ? "smooth" : "auto"});
+      setSearch(null)
+    }
+  },
+  [search]
+  )
+
+  async function createEntry(mon, searchBar) {
+    setSearch(searchBar);
+    setSpace("calc(100vh - 60px)");
+    if(!monPresent) {
+      setReady(false);
+    }
     const data = await mon;
     setDexData(data);
     setReady(true);
     setMonPresent(true);
   }
-  // fetchMon();
+
   return (
     <div>
       <Header />
@@ -48,19 +65,26 @@ function App() {
           createEntry = {createEntry}
           setEntry = {setReady}
         />
-        {monPresent &&
-          <div className="entry-view">
+        <div 
+          className="entry-view" 
+          id="entry-container"
+          style={{minHeight: space}}
+        >
+          {
+            monPresent &&
             <DexEntry
               createEntry = {createEntry}
               dexData = {dexData}
               flex = {flex}
             />
-          </div>
-        }
-        {
-          !ready &&
-          <h1 className="bit-title" style={{color: "var(--blackBlue)"}}>Loading...</h1>
-        }
+          }
+          {
+            !ready &&
+            <div className="entry-block" id="loading">
+              <h1 className="bit-title" style={{color: "var(--blackBlue)"}}>Loading...</h1>
+            </div>
+          }
+        </div>
       </div>
     </div>
   );
