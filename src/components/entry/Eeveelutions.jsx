@@ -1,13 +1,15 @@
 import { ArrowDropDown, ArrowDropUp, ArrowLeft, ArrowRight } from "@mui/icons-material";
 import { parseName } from "../../functions/general";
-import EvoArrow from "./EvoArrow";
+import { useFlex } from "../FlexContext";
 import Variant from "./Variant";
 
-export default function Eeveelutions({chain, createEntry, findBySpecies, name, flex}) {
+export default function Eeveelutions({chain, createEntry, findBySpecies, name}) {
     const {species: eevee, evolves_to: evos} = chain;
+    const flex = useFlex()
+    console.log(flex);
 
     if(flex) {
-        function flexRender(mon, i, array) {
+        function flexRender(mon) {
             const { species } = mon;
             let current;
             
@@ -19,11 +21,7 @@ export default function Eeveelutions({chain, createEntry, findBySpecies, name, f
     
             return (
                 <div>
-                    <EvoArrow 
-                        i={i}
-                        l={array.length}
-                        flex={false}
-                    />
+                    <ArrowRight />
                     <Variant 
                         current = {current}
                         name = {parseName(species.name)}

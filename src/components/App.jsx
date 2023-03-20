@@ -11,32 +11,11 @@ function App() {
   const [search, setSearch] = useState(null);
   const [space, setSpace] = useState("0");
 
-  const [width, setWidth] = useState(window.innerWidth);
-  const [flex, setFlex] = useState(null);
-
-
-  // Set width
-
   useEffect(() => {
-      window.addEventListener('resize', () => {
-          setWidth(window.innerWidth);
-      });
-      const view = document.getElementById("header");
-      view.scrollIntoView({behavior: "smooth"});
+    const view = document.getElementById("header");
+    view.scrollIntoView({behavior: "smooth"});
   },
-  []
-
-  //Check width against 600px (for mobile L)
-
-  )
-  useEffect(() => {
-      if (width < 600) {
-          setFlex(true);
-      } else {
-          setFlex(false);
-      }
-  },
-  [width]);
+  []);
 
   //Scroll to results on completion of Search
 
@@ -65,35 +44,34 @@ function App() {
   }
 
   return (
-    <div>
-      <Header />
-      <div className="main-body">
-        <SearchBar 
-          createEntry = {createEntry}
-          setEntry = {setReady}
-        />
-        <div 
-          className="entry-view" 
-          id="entry-container"
-          style={{minHeight: space}}
-        >
-          {
-            monPresent &&
-            <DexEntry
-              createEntry = {createEntry}
-              dexData = {dexData}
-              flex = {flex}
-            />
-          }
-          {
-            !ready &&
-            <div className="entry-block" id="loading">
-              <h1 className="bit-title" style={{color: "var(--blackBlue)"}}>Loading...</h1>
-            </div>
-          }
+      <div>
+        <Header />
+        <div className="main-body">
+          <SearchBar 
+            createEntry = {createEntry}
+            setEntry = {setReady}
+          />
+          <div 
+            className="entry-view" 
+            id="entry-container"
+            style={{minHeight: space}}
+          >
+            {
+              monPresent &&
+              <DexEntry
+                createEntry = {createEntry}
+                dexData = {dexData}
+              />
+            }
+            {
+              !ready &&
+              <div className="entry-block" id="loading">
+                <h1 className="bit-title" style={{color: "var(--blackBlue)"}}>Loading...</h1>
+              </div>
+            }
+          </div>
         </div>
       </div>
-    </div>
   );
 }
 

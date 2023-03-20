@@ -1,6 +1,8 @@
 import { ArrowRight, ArrowDropDown } from "@mui/icons-material";
+import { useFlex } from "../FlexContext";
 
-export default function EvoArrow({i, l, flex}) {
+export default function EvoArrow({i, l}) {
+    const flex = useFlex();
     let first = false;
     let last = false;
     let rotate;

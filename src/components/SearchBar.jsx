@@ -22,11 +22,6 @@ export default function SearchBar({createEntry, setReady}) {
         buildTree(keys)
     );
 
-    // useEffect(() => {
-
-    // },
-    // [keys]);
-
     function showResults() {
         setFocus(true);
     };

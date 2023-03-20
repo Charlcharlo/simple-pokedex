@@ -1,13 +1,15 @@
 import { findBySpecies } from "../../functions/fetch";
 import { parseName } from "../../functions/general";
+import FlexProvider from "../FlexContext";
 import Eeveelutions from "./Eeveelutions";
 import EvoArrow from "./EvoArrow";
 import Variant from "./Variant";
 
-export default function Evolutions({evoChain, name, createEntry, flex}) {
+export default function Evolutions({evoChain, name, createEntry}) {
     let current;
     const {chain} = evoChain;
     const {evolves_to: evos, species} = chain;
+    
 
     function evoButtons(chain, i, array) {
         const {evolves_to: evos, species} = chain;
@@ -23,7 +25,6 @@ export default function Evolutions({evoChain, name, createEntry, flex}) {
                 <EvoArrow 
                     i={i}
                     l={array.length}
-                    flex={flex}
                 />
                     <Variant 
                         current = {current}
@@ -49,34 +50,37 @@ export default function Evolutions({evoChain, name, createEntry, flex}) {
         return null;
     } else if (evoChain.id === 67) {
         return (
-            <div className="divide-half info-block col-start">
-                <h3 className="soft-title">EVOLUTIONS</h3>
-                <Eeveelutions 
-                    chain={chain}
-                    findBySpecies={findBySpecies}
-                    createEntry={createEntry}
-                    name={name}
-                    flex={flex}
-                />
-            </div>
+            <FlexProvider>
+                <div className="divide-half info-block col-start">
+                    <h3 className="soft-title">EVOLUTIONS</h3>
+                    <Eeveelutions 
+                        chain={chain}
+                        findBySpecies={findBySpecies}
+                        createEntry={createEntry}
+                        name={name}
+                    />
+                </div>
+            </FlexProvider>
         )
     } else {
     return (
-        <div className="divide-half info-block">
-            <h3 className="soft-title">EVOLUTIONS</h3>
-            <div className="evo-branch">
-                <Variant 
-                    current = {current}
-                    name = {parseName(species.name)}
-                    url = {species.url}
-                    createEntry= {createEntry}
-                    search={findBySpecies}
-                />
-                <div className="second-stage">
-                    {evos.map(evoButtons)}
+        <FlexProvider>
+            <div className="divide-half info-block">
+                <h3 className="soft-title">EVOLUTIONS</h3>
+                <div className="evo-branch">
+                    <Variant 
+                        current = {current}
+                        name = {parseName(species.name)}
+                        url = {species.url}
+                        createEntry= {createEntry}
+                        search={findBySpecies}
+                    />
+                    <div className="second-stage">
+                        {evos.map(evoButtons)}
+                    </div>
                 </div>
             </div>
-        </div>
+        </FlexProvider>
     )
     }
 }

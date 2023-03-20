@@ -5,7 +5,7 @@ import Stats from "./entry/Stats";
 import Image from "./entry/Image";
 import Types from "./entry/Types";
 
-export default function DexEntry({dexData, createEntry, flex}) {
+export default function DexEntry({dexData, createEntry}) {
     const { types, stats, evoChain } = dexData;
     const {name} = dexData.species;
     return(
@@ -29,7 +29,6 @@ export default function DexEntry({dexData, createEntry, flex}) {
                     evoChain = {evoChain}
                     createEntry = {createEntry}
                     name = {name}
-                    flex = {flex}
                 />
             </div>
         </div>
