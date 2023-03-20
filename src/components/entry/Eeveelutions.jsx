@@ -5,79 +5,36 @@ import Variant from "./Variant";
 
 export default function Eeveelutions({chain, createEntry, findBySpecies, name, flex}) {
     const {species: eevee, evolves_to: evos} = chain;
-    const topRow = evos.slice(0, 3);
-    const midL = evos[3];
-    const midR = evos[4];
-    const bottomRow = evos.slice(5);
-
-    if (midL.name === name) {
-        midL.current = true;
-    } else {
-        midL.current = false;
-    }
-
-    if (midR.name === name) {
-        midR.current = true;
-    } else {
-        midR.current = false;
-    }
-
-    if (eevee.name === name) {
-        eevee.current = true;
-    } else {
-        eevee.current = false;
-    }
-
-    function flexRender(mon, i, array) {
-        const { species } = mon;
-        let current;
-        
-        if (name === species.name) {
-            current = true;
-        } else {
-            current = false;
-        }
-
-        return (
-            <div>
-                <EvoArrow 
-                    i={i}
-                    l={array.length}
-                    flex={false}
-                />
-                <Variant 
-                    current = {current}
-                    name = {parseName(species.name)}
-                    url = {species.url}
-                    createEntry={createEntry}
-                    search={findBySpecies}
-                />
-            </div>
-        )
-    }
-
-    function renderRow(mon) {
-        const { species } = mon;
-        let current;
-        
-        if (name === species.name) {
-            current = true;
-        } else {
-            current = false;
-        }
-
-        return (
-            <Variant 
-                current = {current}
-                name = {parseName(species.name)}
-                url = {species.url}
-                createEntry={createEntry}
-                search={findBySpecies}
-            />
-        )
-    }
 
     if(flex) {
+        function flexRender(mon, i, array) {
+            const { species } = mon;
+            let current;
+            
+            if (name === species.name) {
+                current = true;
+            } else {
+                current = false;
+            }
+    
+            return (
+                <div>
+                    <EvoArrow 
+                        i={i}
+                        l={array.length}
+                        flex={false}
+                    />
+                    <Variant 
+                        current = {current}
+                        name = {parseName(species.name)}
+                        url = {species.url}
+                        createEntry={createEntry}
+                        search={findBySpecies}
+                    />
+                </div>
+            )
+        }
+
         return (
             <div className="eevee-branch">
                 <Variant 
@@ -93,6 +50,52 @@ export default function Eeveelutions({chain, createEntry, findBySpecies, name, f
             </div>
         )
     } else {
+        const topRow = evos.slice(0, 3);
+        const midL = evos[3];
+        const midR = evos[4];
+        const bottomRow = evos.slice(5);
+    
+        if (midL.name === name) {
+            midL.current = true;
+        } else {
+            midL.current = false;
+        }
+    
+        if (midR.name === name) {
+            midR.current = true;
+        } else {
+            midR.current = false;
+        }
+    
+        if (eevee.name === name) {
+            eevee.current = true;
+        } else {
+            eevee.current = false;
+        }
+    
+        function renderRow(mon) {
+            const { species } = mon;
+            let current;
+            
+            if (name === species.name) {
+                current = true;
+            } else {
+                current = false;
+            }
+    
+            return (
+                <Variant 
+                    current = {current}
+                    name = {parseName(species.name)}
+                    url = {species.url}
+                    createEntry={createEntry}
+                    search={findBySpecies}
+                />
+            )
+        }
+
+
+
         return (
             <div id="eeveelutions">
                 <div className="row-start">
@@ -159,14 +162,4 @@ export default function Eeveelutions({chain, createEntry, findBySpecies, name, f
             </div>
         )
     }
-
-
-    //break up array into 3 rows
-    // Eevee in center, others wrap around 
-    // Jolteon, Flareon, Vaporeon
-    // Espeon, Eevee, Umbreon
-    // Glaceon, Leafeon, Sylveon
-
-    //Abolute position around that
-    // Check flex to just diplay the two
 }

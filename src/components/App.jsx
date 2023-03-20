@@ -3,8 +3,6 @@ import Header from './Header';
 import SearchBar from './SearchBar';
 import DexEntry from './DexEntry';
 import { useState, useEffect } from 'react';
-// import { Collapse } from '@mui/material';
-// import fetchMon from '../functions/fetch';
 
 function App() {
   const [ready, setReady] = useState(true);
@@ -16,6 +14,9 @@ function App() {
   const [width, setWidth] = useState(window.innerWidth);
   const [flex, setFlex] = useState(null);
 
+
+  // Set width
+
   useEffect(() => {
       window.addEventListener('resize', () => {
           setWidth(window.innerWidth);
@@ -24,6 +25,8 @@ function App() {
       view.scrollIntoView({behavior: "smooth"});
   },
   []
+
+  //Check width against 600px (for mobile L)
 
   )
   useEffect(() => {
@@ -35,6 +38,8 @@ function App() {
   },
   [width]);
 
+  //Scroll to results on completion of Search
+
   useEffect(() => {
     if (search !== null) {
       const view = document.getElementById("entry-container");
@@ -43,7 +48,9 @@ function App() {
     }
   },
   [search]
-  )
+  );
+
+  //Fetch pokemon data from API, assign to dexData object
 
   async function createEntry(mon, searchBar) {
     setSearch(searchBar);

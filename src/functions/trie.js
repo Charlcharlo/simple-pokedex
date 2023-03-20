@@ -44,7 +44,6 @@ function insert(key) {
        
     // mark last node as leaf
     node.isEndOfWord = true;
-    // key.name = startCase(key.name);
     node.value = key;
 
     node.value.displayName = parseName(key.name);
@@ -109,14 +108,4 @@ function buildTree(array) {
     })
 }
 
-// const keys = ["abra", "absol", "mew", "muk", "xerneas", "tapu-koko", "paras", "parasect"];
-
-// buildTree(keys);
-
-// const query = "p";
-
-// const result = search(query);
-
-// console.log(result);
-
-export {root, TrieNode, buildTree, insert, search, ALPHABET_SIZE}
+export {buildTree, search}

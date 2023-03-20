@@ -26,7 +26,6 @@ async function findMon(url) {
     monData.species.info = speciesData;
     monData.evoChain = evoChain;
     return monData;
-    // console.log(monData);
 };
 
 async function findBySpecies(url) {

@@ -3,13 +3,14 @@ import { Collapse } from '@mui/material';
 import { useEffect, useState } from 'react';
 import Results from './Results';
 import {buildTree, search } from '../functions/trie';
-// import { prepareMons } from '../functions/fetch';
 
 export default function SearchBar({createEntry, setReady}) {
     const [focus, setFocus] = useState(false);
     const [query, setQuery] = useState("");
     const [results, setResult] = useState([]);
     const [keys, setKeys] = useState([]);
+
+    //Create Trie
 
     fetch('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0')
     .then((response) => response.json())
@@ -21,25 +22,26 @@ export default function SearchBar({createEntry, setReady}) {
         buildTree(keys)
     );
 
-    const showResults = () => {
+    // useEffect(() => {
+
+    // },
+    // [keys]);
+
+    function showResults() {
         setFocus(true);
     };
 
-    const hideResults = () => {
+    function hideResults() {
         setFocus(false);
     }
 
-    // buildTree(testDex);
+    //Update List
 
     useEffect(() => {
         const result = search(query);
         setResult(result)
     },
     [query]);
-
-    // const query = "p";
-
-    // console.log(result);
 
     return (
         <div>
