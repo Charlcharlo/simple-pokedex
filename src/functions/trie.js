@@ -108,4 +108,4 @@ function buildTree(array) {
     })
 }
 
-export {buildTree, search}
+export {root, buildTree, search}
