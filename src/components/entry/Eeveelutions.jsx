@@ -9,7 +9,7 @@ export default function Eeveelutions({chain, createEntry, findBySpecies, name}) 
     console.log(flex);
 
     if(flex) {
-        function flexRender(mon) {
+        function flexRender(mon, i) {
             const { species } = mon;
             let current;
             
@@ -22,7 +22,8 @@ export default function Eeveelutions({chain, createEntry, findBySpecies, name}) 
             return (
                 <div>
                     <ArrowRight />
-                    <Variant 
+                    <Variant
+                        key={i}
                         current = {current}
                         name = {parseName(species.name)}
                         url = {species.url}
@@ -71,7 +72,7 @@ export default function Eeveelutions({chain, createEntry, findBySpecies, name}) 
             eevee.current = false;
         }
     
-        function renderRow(mon) {
+        function renderRow(mon, i) {
             const { species } = mon;
             let current;
             
@@ -82,7 +83,8 @@ export default function Eeveelutions({chain, createEntry, findBySpecies, name}) 
             }
     
             return (
-                <Variant 
+                <Variant
+                    key={i}
                     current = {current}
                     name = {parseName(species.name)}
                     url = {species.url}

@@ -10,7 +10,7 @@ export default function Forms({dexData, createEntry}) {
     const {name: pkmName} = dexData;
 
 
-    const renderForms = (form) => {
+    const renderForms = (form, i) => {
         let shortForm
         let current
         const length = name.length + 1;
@@ -29,6 +29,7 @@ export default function Forms({dexData, createEntry}) {
         shortForm = startCase(shortForm);
         return (
             <Variant
+                key={i}
                 name={shortForm}
                 current={current}
                 createEntry={createEntry}
