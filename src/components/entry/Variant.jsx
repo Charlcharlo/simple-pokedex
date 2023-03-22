@@ -1,4 +1,10 @@
-export default function Variant({ current, name, createEntry, url, search }) {
+export default function Variant({ 
+    current,
+    name, 
+    createEntry, 
+    url, 
+    search, 
+    imgUrl }) {
 
     return (
         <button 
@@ -11,6 +17,11 @@ export default function Variant({ current, name, createEntry, url, search }) {
                 }
             }
         >
+            <img 
+                className="variant-img"
+                src={imgUrl} 
+                alt={name}
+            />
             {name}
         </button>
     )

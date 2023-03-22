@@ -1,5 +1,5 @@
 import { findBySpecies } from "../../functions/fetch";
-import { parseName } from "../../functions/general";
+import { parseName, pkmImageUrl } from "../../functions/general";
 import FlexProvider from "../FlexContext";
 import Eeveelutions from "./Eeveelutions";
 import EvoArrow from "./EvoArrow";
@@ -9,10 +9,12 @@ export default function Evolutions({evoChain, name, createEntry}) {
     let current;
     const {chain} = evoChain;
     const {evolves_to: evos, species} = chain;
+    const imgUrl = pkmImageUrl(species.url);
     
 
     function evoButtons(chain, i, array) {
         const {evolves_to: evos, species} = chain;
+        const imgUrl = pkmImageUrl(species.url);
         if (name === species.name) {
             current = true;
         } else {
@@ -32,6 +34,7 @@ export default function Evolutions({evoChain, name, createEntry}) {
                         url = {species.url}
                         createEntry={createEntry}
                         search={findBySpecies}
+                        imgUrl={imgUrl}
                     />
                 <div className="third-stage">
                     {evos.map(evoButtons)}
@@ -74,6 +77,7 @@ export default function Evolutions({evoChain, name, createEntry}) {
                         url = {species.url}
                         createEntry= {createEntry}
                         search={findBySpecies}
+                        imgUrl={imgUrl}
                     />
                     <div className="second-stage">
                         {evos.map(evoButtons)}

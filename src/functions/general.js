@@ -24,4 +24,15 @@ const parseName = (name) => {
     return output;
 }
 
+export function findId(url) {
+    const urlArray = url.split("/");
+    const idI = urlArray.length - 2;
+    return urlArray[idI];
+};
+
+export function pkmImageUrl(url) {
+    const id = findId(url);
+    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
+}
+
 export { parseName };

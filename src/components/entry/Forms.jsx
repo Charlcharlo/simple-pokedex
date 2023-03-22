@@ -1,6 +1,7 @@
 import { findMon } from "../../functions/fetch";
 import { startCase } from "lodash";
 import Variant from "./Variant";
+import { pkmImageUrl } from "../../functions/general";
 
 // import { useState } from "react";
 
@@ -10,9 +11,10 @@ export default function Forms({dexData, createEntry}) {
     const {name: pkmName} = dexData;
 
 
-    const renderForms = (form, i) => {
+    function renderForms(form, i) {
         let shortForm
         let current
+        const imgUrl = pkmImageUrl(form.pokemon.url);
         const length = name.length + 1;
         if(name !== form.pokemon.name) {
             shortForm = form.pokemon.name.slice(length);
@@ -35,6 +37,7 @@ export default function Forms({dexData, createEntry}) {
                 createEntry={createEntry}
                 url={form.pokemon.url}
                 search={findMon}
+                imgUrl={imgUrl}
             />
         )
     }
