@@ -5,12 +5,14 @@
     --black-blue: #050f14;
     --off-white: #edf2f5;
     --gray: #d7e1e6;
+    --quartGray: #b1babe;
     --medGray: #5a6164;
     --yellow-white: #f8f8ef;
     --red: #E12C38;
     --yellow: #fffb18;
 
     --std-shadow: 2px 2px 10px var(--dark-blue);
+    --small-shadow: 0 0 5px var(--black-blue);
 
     --blackBorder: 10px solid var(--black-blue);
     --thinBlackBorder: 2px solid var(--black-blue);
@@ -18,12 +20,17 @@
     --body-font: Creato;
     --bit-font: pixel-operator;
     --block-font: 'nk47', monospace;
-    --poke-font: Ketchum;
+    --poke-font: pocket-monk;
 }
 
 @font-face {
     font-family: "Ketchum";
     src: url(./fonts/Ketchum.otf);
+}
+
+@font-face {
+  font-family: "pocket-monk";
+  src: url("./fonts/PocketMonk-15ze.ttf");
 }
 
 @font-face {
@@ -66,6 +73,7 @@ button:disabled {
     position: relative;
     z-index: 2;
     font-family: var(--poke-font);
+    letter-spacing: 5px;
     font-size: 9rem;
     color: var(--blue);
     -webkit-text-stroke: 1px var(--yellow);
@@ -349,7 +357,7 @@ button:disabled {
 
 .img-block img {
   width: 260px;
-  margin: 20px;
+  margin: 60px 20px 20px;
 }
 
 .img-block .soft-title {
@@ -443,6 +451,10 @@ button:disabled {
   align-items: center;
 }
 
+.eevee-branch .info-pill {
+  width: 100px;
+}
+
 .info-pill {
     border-radius: 50px;
     padding: 2px;
@@ -450,7 +462,7 @@ button:disabled {
     width: 130px;
     text-align: center;
     border: 2px solid black;
-    max-height: 2rem;
+    max-height: 5rem;
   }
 
   .info-pill p {
@@ -467,17 +479,46 @@ button:disabled {
   }
   
   button.info-pill {
-    background-color: var(--gray);
-    margin-right: 20px;
+    width: 150px;
+    background-color: white;
+    box-shadow: inset 0 0 5px var(--medGray);
+    /* color: white; */
+    border: none;
+    margin-right: 25px !important;
     margin-left: 0;
     font-size: 1rem;
-    height: 2rem;
+    height: 3rem;
+    padding: 0;
+    padding-right: 10px;
+    display: inline-flex;
+    justify-content: right;
+    align-items: center;
+    position: relative;
+  }
+
+  button.info-pill:hover {
+    box-shadow: inset 0 0 5px var(--dark-blue);
+    /* padding-right: 15px;
+    margin: 2px 20px 2px 5px !important;
+    width: 155px;
+    height: calc(3rem + 4px); */
+    /* font-size: calc(1rem + 2px); */
+  }
+
+  button.info-pill:hover .variant-img {
+    height: 165%;
   }
 
   button.info-pill:disabled {
-    background-color: var(--yellow);
-    border-color: var(--blue);
+    background-color: var(--blue-light);
     cursor: default;
+  }
+
+  .variant-img {
+    height: 150%;
+    display: inline;
+    position: absolute;
+    left: -0.5rem;
   }
 
   .bug {
@@ -606,6 +647,7 @@ button:disabled {
   @media (max-width: 600px) {
     .title {
       font-size: 5rem;
+      -webkit-text-stroke-width: 3px;
     }
 
     .bit-title {
@@ -613,7 +655,21 @@ button:disabled {
     }
 
     .img-block {
+      box-sizing: border-box;
       max-width: 100%;
+    }
+
+    .img-block img {
+      box-sizing: border-box;
+      width: calc(100% - 40px); 
+    }
+
+    .types {
+      width: 100%;
+    }
+
+    .types .info-pill {
+      width: 50%;
     }
 
     .entry-block {
@@ -625,6 +681,18 @@ button:disabled {
       display: flex;
       justify-content: space-between;
       align-items: center;
+    }
+
+    #genus {
+      text-align: left;
+    }
+
+    .entry-text {
+      text-align: left;
+    }
+
+    .stat-block {
+      width: calc(50% - 10px);
     }
 
     .stat-block .bit-title {

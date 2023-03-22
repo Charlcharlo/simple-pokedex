@@ -1,4 +1,4 @@
-import { startCase, capitalize } from "lodash";
+import { startCase } from "lodash";
 import { useState } from "react";
 import { parseName } from "../../functions/general";
 
@@ -19,7 +19,11 @@ export default function Information({dexData}) {
                 <h1 className="bit-title">{name}</h1>
             </div>
             <div className="row-between">
-                <h3 className="soft-title">{genus ? `The ${genus.genus}` : "A new pokemon"}</h3>
+                <h3 
+                    className="soft-title" id="genus">{genus 
+                    ? `The ${genus.genus}` 
+                    : "A new pokemon"}
+                </h3>
                 {entries[0]
                 && (
                 <div id="version-dropdown">
@@ -44,7 +48,7 @@ export default function Information({dexData}) {
             </div>
             <p className="entry-text">
                 {entries[flavorIndex] 
-                ? capitalize(entries[flavorIndex].flavor_text)
+                ? entries[flavorIndex].flavor_text
                 : "This is a new Pokemon and its data has not yet been loaded. Please check back later."}
             </p>
             </div>
