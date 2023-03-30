@@ -54,7 +54,7 @@ export default function Evolutions({evoChain, name, createEntry}) {
     } else if (evoChain.id === 67) {
         return (
             <FlexProvider>
-                <div className="divide-half info-block col-start">
+                <div className="divide-half info-block col-start" id="evolutions">
                     <h3 className="soft-title">EVOLUTIONS</h3>
                     <Eeveelutions 
                         chain={chain}
@@ -68,7 +68,7 @@ export default function Evolutions({evoChain, name, createEntry}) {
     } else {
     return (
         <FlexProvider>
-            <div className="divide-half info-block">
+            <div className="divide-half info-block" id="evolutions">
                 <h3 className="soft-title">EVOLUTIONS</h3>
                 <div className="evo-branch">
                     <Variant 

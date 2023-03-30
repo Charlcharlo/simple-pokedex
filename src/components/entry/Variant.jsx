@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 export default function Variant({ 
     current,
     name, 
@@ -6,8 +8,15 @@ export default function Variant({
     search, 
     imgUrl }) {
 
+    const [error, setError] = useState(false);
+    const backupImg = "./images/pokeball-svgrepo.svg";
+    const errorCheckHeight = {
+        height: "70%",
+        left: "10px"
+    }
+    
     return (
-        <button 
+        <button
             className="info-pill"
             disabled={current}
             onClick={
@@ -19,8 +28,16 @@ export default function Variant({
         >
             <img 
                 className="variant-img"
-                src={imgUrl} 
+                onError={() => {
+                    setError(true);
+                }}
+                src={
+                    !error ?
+                    imgUrl :
+                    backupImg
+                }
                 alt={name}
+                style={error ? errorCheckHeight : {}}
             />
             {name}
         </button>

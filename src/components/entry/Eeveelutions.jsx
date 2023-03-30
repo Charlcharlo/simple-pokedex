@@ -1,12 +1,12 @@
 import { ArrowDropDown, ArrowDropUp, ArrowLeft, ArrowRight } from "@mui/icons-material";
-import { parseName } from "../../functions/general";
+import { parseName, pkmImageUrl } from "../../functions/general";
 import { useFlex } from "../FlexContext";
 import Variant from "./Variant";
 
 export default function Eeveelutions({chain, createEntry, findBySpecies, name}) {
     const {species: eevee, evolves_to: evos} = chain;
-    const flex = useFlex()
-    console.log(flex);
+    const flex = useFlex();
+    const eeveeSprite = pkmImageUrl(eevee.url);
 
     if(flex) {
         function flexRender(mon, i) {
@@ -20,15 +20,15 @@ export default function Eeveelutions({chain, createEntry, findBySpecies, name}) 
             }
     
             return (
-                <div>
+                <div key={i}>
                     <ArrowRight />
                     <Variant
-                        key={i}
                         current = {current}
                         name = {parseName(species.name)}
                         url = {species.url}
-                        createEntry={createEntry}
-                        search={findBySpecies}
+                        createEntry = {createEntry}
+                        search = {findBySpecies}
+                        imgUrl = {pkmImageUrl(species.url)}
                     />
                 </div>
             )
@@ -40,8 +40,9 @@ export default function Eeveelutions({chain, createEntry, findBySpecies, name}) 
                     current = {eevee.current}
                     name = {parseName(eevee.name)}
                     url = {eevee.url}
-                    createEntry= {createEntry}
-                    search= {findBySpecies}
+                    createEntry = {createEntry}
+                    search = {findBySpecies}
+                    imgUrl = {eeveeSprite}
                 />
                 <div>
                     {evos.map(flexRender)}
@@ -90,6 +91,7 @@ export default function Eeveelutions({chain, createEntry, findBySpecies, name}) 
                     url = {species.url}
                     createEntry={createEntry}
                     search={findBySpecies}
+                    imgUrl = {pkmImageUrl(species.url)}
                 />
             )
         }
@@ -108,6 +110,7 @@ export default function Eeveelutions({chain, createEntry, findBySpecies, name}) 
                         url = {midL.species.url}
                         createEntry={createEntry}
                         search={findBySpecies}
+                        imgUrl = {pkmImageUrl(midL.species.url)}
                     />
                     <div>
                         <div className="row-between">
@@ -129,8 +132,9 @@ export default function Eeveelutions({chain, createEntry, findBySpecies, name}) 
                                 current = {eevee.current}
                                 name = {parseName(eevee.name)}
                                 url = {eevee.url}
-                                createEntry= {createEntry}
-                                search= {findBySpecies}
+                                createEntry = {createEntry}
+                                search = {findBySpecies}
+                                imgUrl = {eeveeSprite}
                             />
                             <div className="evo-arrow">
                                 <ArrowRight />
@@ -154,6 +158,7 @@ export default function Eeveelutions({chain, createEntry, findBySpecies, name}) 
                         url = {midR.species.url}
                         createEntry= {createEntry}
                         search= {findBySpecies}
+                        imgUrl = {pkmImageUrl(midR.species.url)}
                     />
                 </div>
                 <div className="row-start">

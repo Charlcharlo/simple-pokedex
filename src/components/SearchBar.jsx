@@ -5,7 +5,7 @@ import Results from './Results';
 import {buildTree, search } from '../functions/trie';
 
 export default function SearchBar({createEntry, setReady}) {
-    const [focus, setFocus] = useState(false);
+    const [barFocus, setBarFocus] = useState(false);
     const [query, setQuery] = useState("");
     const [results, setResult] = useState([]);
     const [keys, setKeys] = useState([]);
@@ -23,11 +23,13 @@ export default function SearchBar({createEntry, setReady}) {
     );
 
     function showResults() {
-        setFocus(true);
+        setBarFocus(true);
+        setFocus(null);
     };
 
     function hideResults() {
-        setFocus(false);
+        setBarFocus(false);
+        setFocus(null);
     }
 
     //Update List
@@ -38,6 +40,66 @@ export default function SearchBar({createEntry, setReady}) {
     },
     [query]);
 
+    //Arrow Keys
+
+    const [focus, setFocus] = useState(null);
+
+    function chooseItem(i) {
+        setFocus(i);
+    }
+
+    //Set listener for up and down arrows
+    useEffect(() => {
+        function keyListener(event) {
+            if(results.length > 0) {
+                const end = results.length - 1;
+                if (event.key === "ArrowDown") {
+                    event.preventDefault();
+                    setFocus((prevVal) => {
+                        if(prevVal === null || prevVal === end) {
+                            return 0;
+                        } else {
+                            return prevVal + 1;
+                        }
+                    });
+                } else if(event.key === "ArrowUp") {
+                    event.preventDefault();
+                    setFocus((prevVal) => {
+                        if (prevVal === null || prevVal === 0) {
+                            return end;
+                        } else {
+                            return prevVal - 1;
+                        }
+                    });
+                } else if(event.key === "Tab") {
+                    event.preventDefault();
+                }
+            }
+        };
+
+        document.addEventListener("keydown", keyListener);
+        return () => document.removeEventListener("keydown", keyListener);
+    },
+    [results]);
+
+    useEffect(() => {
+        if(focus != null) {
+            //Set focus on selected item in the list
+            const targetId = `result-${focus}`;
+            const target = document.getElementById(targetId);
+            target.focus();
+            //click item on Enter press
+            function findOnEnter(event) {
+                if(event.key === "Enter") {
+                    target.click();
+                }
+            }
+            document.addEventListener("keydown", findOnEnter);
+            return () => document.removeEventListener("keydown", findOnEnter);
+        }
+    },
+    [focus]);
+
     return (
         <div>
             <ClickAwayListener onClickAway={hideResults}>
@@ -46,17 +108,19 @@ export default function SearchBar({createEntry, setReady}) {
                     onFocus={showResults}
                     onChange={(event) => {
                         setQuery(event.target.value);
+                        chooseItem(null)
                     }}
                     className="search-bar"
                     type="text"
                     placeholder="Type here to start searching"
                 />
-                <Collapse in={focus}>
+                <Collapse in={barFocus}>
                     <div className="results-container">
                         <Results
                             createEntry = {createEntry}
                             hideResults = {hideResults}
                             list={results}
+                            focus={focus}
                         />
                     </div>
                 </Collapse>

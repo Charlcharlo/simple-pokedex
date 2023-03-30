@@ -1,7 +1,7 @@
 import { findMon } from "../../functions/fetch";
 import { startCase } from "lodash";
 import Variant from "./Variant";
-import { pkmImageUrl } from "../../functions/general";
+import { parseName, pkmImageUrl } from "../../functions/general";
 
 // import { useState } from "react";
 
@@ -16,8 +16,9 @@ export default function Forms({dexData, createEntry}) {
         let current
         const imgUrl = pkmImageUrl(form.pokemon.url);
         const length = name.length + 1;
+        const formName = parseName(form.pokemon.name);
         if(name !== form.pokemon.name) {
-            shortForm = form.pokemon.name.slice(length);
+            shortForm = formName.slice(length);
         } else {
             shortForm = "Base";
         }
@@ -44,7 +45,15 @@ export default function Forms({dexData, createEntry}) {
 
     if(varieties.length > 1) {
         return (
-            <div  className="divide-half info-block">
+            <div
+                className="divide-half info-block"
+                id={
+                    name === "eevee" ?
+                    "eevee-forms" :
+                    "forms"
+                }
+
+            >
                 <h3 className="soft-title">FORMS</h3>
                 <div className="name-and-number">
                     { varieties.map(renderForms)}
