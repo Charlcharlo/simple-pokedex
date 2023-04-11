@@ -38,6 +38,7 @@ function App() {
       setReady(false);
     }
     const data = await mon;
+    console.log(data);
     setDexData(data);
     setReady(true);
     setMonPresent(true);

@@ -25,6 +25,7 @@ async function findMon(url) {
     const evoChain = await findBase(speciesData.evolution_chain.url);
     monData.species.info = speciesData;
     monData.evoChain = evoChain;
+    console.log(monData);
     return monData;
 };
 

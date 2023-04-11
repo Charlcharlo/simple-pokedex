@@ -103,8 +103,10 @@ function search(key) {
 // Construct trie
 function buildTree(array) {
     root = new TrieNode();
-    array.forEach(element =>{
-        insert(element);
+    array.forEach((element, i) => {
+        if(i < 905 || (i > 1007  && i < 1257)) {
+            insert(element);
+        }
     })
 }
 

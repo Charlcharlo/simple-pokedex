@@ -77,7 +77,7 @@ button:disabled {
     letter-spacing: 5px;
     font-size: 9rem;
     color: var(--blue);
-    -webkit-text-stroke: 1px var(--yellow);
+    -webkit-text-stroke: 3px var(--yellow);
     text-shadow: var(--std-shadow);
 }
 
@@ -151,7 +151,7 @@ button:disabled {
 
 .title-block {
   position: relative;
-  padding: 20px 20px 70px;
+  padding: 70px 20px 70px;
   background-color: var(--red);
   text-align: center;
   border-bottom: var(--blackBorder);
@@ -176,6 +176,32 @@ button:disabled {
   transform: translate(-50%, -50%);
   border-width: 5px;
 }
+
+/* Banner */
+
+.banner {
+  background-color: var(--blue);
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 10%;
+}
+
+.banner p {
+  color: white;
+  font-size: 1.2rem;
+  font-family: var(--bit-font);
+}
+
+.banner .invisibutton {
+  color: white;
+  position: static;
+}
+
+/* Searchbar */
 
 .search-block {
     text-align: center;

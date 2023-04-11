@@ -4,6 +4,7 @@ import Result from './Result';
 export default function Results({list, createEntry, hideResults, chooseItem}) {
 
     function renderResult(mon) {
+        console.log(mon);
         const monData = findMon(mon.url);
         createEntry(monData, true);
         hideResults();

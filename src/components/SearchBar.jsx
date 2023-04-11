@@ -12,14 +12,18 @@ export default function SearchBar({createEntry, setReady}) {
 
     //Create Trie
 
-    fetch('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0')
-    .then((response) => response.json())
-    .then((data) => {
-        const { results } = data;
-        setKeys(results);
-    })
-    .then(
-        buildTree(keys)
+    useEffect(() => {
+        fetch('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0')
+        .then((response) => response.json())
+        .then((data) => {
+            const { results } = data;
+            setKeys(results);
+        })
+        .then(
+            buildTree(keys)
+        );
+    },
+    [keys]
     );
 
     function showResults() {
@@ -121,6 +125,7 @@ export default function SearchBar({createEntry, setReady}) {
                             hideResults = {hideResults}
                             list={results}
                             focus={focus}
+                            chooseItem={chooseItem}
                         />
                     </div>
                 </Collapse>
