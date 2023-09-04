@@ -105,9 +105,10 @@ function buildTree(array) {
     root = new TrieNode();
     array.forEach((element, i) => {
         if(i < 905 || (i > 1007  && i < 1257)) {
-            insert(element);
+            insert(element, root);
         }
     })
+    return root;
 }
 
 export {root, buildTree, search}
